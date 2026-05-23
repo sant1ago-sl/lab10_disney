@@ -157,20 +157,29 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          backgroundColor: const Color(0xFF1A1C29),
+          backgroundColor: const Color(0xFF1E2230),
+          shadowColor: const Color(0xFF00D2F3).withOpacity(0.3),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: const BorderSide(color: Color(0xFF00D2F3), width: 1.5),
+          ),
           title: Row(
             children: [
-              const Icon(Icons.check_circle, color: Color(0xFF00D2F3)),
-              const SizedBox(width: 10),
+              const Icon(Icons.check_circle, color: Color(0xFF00D2F3), size: 28),
+              const SizedBox(width: 12),
               Text(
                 '¡Correo Registrado!',
-                style: GoogleFonts.lora(color: Colors.white, fontWeight: FontWeight.bold),
+                style: GoogleFonts.lora(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
             ],
           ),
           content: Text(
             'Hemos registrado tu correo: ${_emailController.text}.\n\nPlan seleccionado: ${_selectedPlan.toUpperCase()}\n\nSerás redirigido para completar tu suscripción.',
-            style: const TextStyle(color: Color(0xFFA6A9B2)),
+            style: const TextStyle(color: Color(0xFFA6A9B2), fontSize: 15, height: 1.4),
           ),
           actions: [
             TextButton(
@@ -182,7 +191,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                 'Aceptar',
                 style: GoogleFonts.bebasNeue(
                   color: const Color(0xFF00D2F3),
-                  fontSize: 16,
+                  fontSize: 18,
                   letterSpacing: 1.0,
                 ),
               ),
@@ -199,19 +208,57 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
     final isDesktop = size.width > 900;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildHeroSection(size, isDesktop),
-            _buildBrandLogosRow(isDesktop),
-            _buildESPNPromoBanner(isDesktop),
-            _buildTop10Section(),
-            _buildPlanSelectionSection(isDesktop),
-            _buildFAQSection(isDesktop),
-            _buildFooterSection(),
-          ],
-        ),
+      body: Stack(
+        children: [
+          Positioned(
+            top: -150,
+            right: -150,
+            child: Container(
+              width: 500,
+              height: 500,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    const Color(0xFF00D2F3).withOpacity(0.12),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: size.height * 0.4,
+            left: -200,
+            child: Container(
+              width: 600,
+              height: 600,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    const Color(0xFF7A1FA2).withOpacity(0.08),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildHeroSection(size, isDesktop),
+                _buildBrandLogosRow(isDesktop),
+                _buildESPNPromoBanner(isDesktop),
+                _buildTop10Section(),
+                _buildPlanSelectionSection(isDesktop),
+                _buildFAQSection(isDesktop),
+                _buildFooterSection(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -220,7 +267,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
     return Stack(
       children: [
         Container(
-          height: isDesktop ? 650 : 580,
+          height: isDesktop ? 680 : 600,
           width: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -230,19 +277,19 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
           ),
         ),
         Container(
-          height: isDesktop ? 650 : 580,
+          height: isDesktop ? 680 : 600,
           width: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.black.withOpacity(0.3),
-                const Color(0xFF040714).withOpacity(0.5),
-                const Color(0xFF040714).withOpacity(0.85),
+                Colors.black.withOpacity(0.4),
+                const Color(0xFF040714).withOpacity(0.6),
+                const Color(0xFF040714).withOpacity(0.92),
                 const Color(0xFF040714),
               ],
-              stops: const [0.0, 0.4, 0.75, 1.0],
+              stops: const [0.0, 0.35, 0.75, 1.0],
             ),
           ),
         ),
@@ -257,40 +304,40 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                     Text(
                       'UEFA Champions League',
                       style: GoogleFonts.bebasNeue(
-                        color: const Color(0xFF8E9099),
+                        color: const Color(0xFF00D2F3).withOpacity(0.8),
                         fontSize: 16,
-                        letterSpacing: 2.0,
+                        letterSpacing: 2.5,
                       ),
                     ),
                     OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        side: const BorderSide(color: Colors.white, width: 1),
+                        side: const BorderSide(color: Color(0xFF00D2F3), width: 1.5),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(6),
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                        backgroundColor: Colors.black.withOpacity(0.4),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                        backgroundColor: const Color(0xFF040714).withOpacity(0.6),
                       ),
                       child: Text(
                         'INICIAR SESIÓN',
                         style: GoogleFonts.bebasNeue(
                           fontSize: 15,
-                          letterSpacing: 1.5,
+                          letterSpacing: 1.8,
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: isDesktop ? 60 : 40),
+                SizedBox(height: isDesktop ? 70 : 50),
                 Center(
                   child: Container(
-                    constraints: const BoxConstraints(maxWidth: 180),
+                    constraints: const BoxConstraints(maxWidth: 220),
                     child: Image.asset(
                       'assets/images/logo_local.png',
                       color: Colors.white,
-                      height: 60,
+                      height: 70,
                       fit: BoxFit.contain,
                       errorBuilder: (context, error, stackTrace) {
                         return Text(
@@ -305,46 +352,53 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 16),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.8),
-                      width: 1,
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF00D2F3), Color(0xFF00796B)],
                     ),
                     borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF00D2F3).withOpacity(0.3),
+                        blurRadius: 10,
+                        offset: const Offset(0, 2),
+                      )
+                    ],
                   ),
                   child: Text(
                     'Plan Premium',
                     style: GoogleFonts.bebasNeue(
                       fontSize: 13,
-                      letterSpacing: 1.0,
-                      color: Colors.white,
+                      letterSpacing: 1.2,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 28),
                 Text(
                   'Series exclusivas, éxitos del cine,\nel deporte de ESPN y más',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.bebasNeue(
-                    fontSize: isDesktop ? 54 : 36,
+                    fontSize: isDesktop ? 62 : 38,
                     color: Colors.white,
                     height: 1.1,
-                    letterSpacing: 1.5,
+                    letterSpacing: 2.0,
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 18),
                 Text(
                   'Ingresa tu correo para comenzar',
                   style: GoogleFonts.lora(
-                    fontSize: 17,
-                    color: const Color(0xFFF9F9F9),
+                    fontSize: 18,
+                    color: const Color(0xFFE0E0E0),
                     fontStyle: FontStyle.italic,
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
                 Form(
                   key: _formKey,
                   child: Container(
@@ -365,45 +419,49 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                           },
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                            fillColor: const Color(0xFF31343E),
+                            fillColor: const Color(0xFF131520),
                             filled: true,
                             hintText: 'Correo electrónico',
-                            hintStyle: const TextStyle(color: Color(0xFF8E9099)),
+                            hintStyle: const TextStyle(color: Color(0xFF757885)),
                             contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 18,
+                              horizontal: 20,
+                              vertical: 20,
                             ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                color: Color(0xFF00D2F3),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                color: Colors.white.withOpacity(0.08),
                                 width: 1.5,
                               ),
                             ),
-                            errorStyle: const TextStyle(color: Colors.redAccent),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF00D2F3),
+                                width: 2.0,
+                              ),
+                            ),
+                            errorStyle: const TextStyle(color: Colors.redAccent, fontSize: 13),
                           ),
                         ),
-                        const SizedBox(height: 14),
+                        const SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: _submitEmail,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF00D2F3),
                             foregroundColor: Colors.black,
-                            padding: const EdgeInsets.symmetric(vertical: 18),
+                            padding: const EdgeInsets.symmetric(vertical: 20),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            elevation: 0,
+                            elevation: 8,
+                            shadowColor: const Color(0xFF00D2F3).withOpacity(0.4),
                           ),
                           child: Text(
                             'SUSCRIBIRME AHORA',
                             style: GoogleFonts.bebasNeue(
-                              fontSize: 18,
-                              letterSpacing: 1.0,
+                              fontSize: 20,
+                              letterSpacing: 1.5,
                             ),
                           ),
                         ),
@@ -411,14 +469,14 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 28),
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     style: const TextStyle(
                       fontSize: 13,
                       color: Color(0xFFA6A9B2),
-                      height: 1.5,
+                      height: 1.6,
                     ),
                     children: [
                       const TextSpan(text: 'Ahorra desde 30% en '),
@@ -439,7 +497,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                             'Ver detalles de los planes',
                             style: TextStyle(
                               decoration: TextDecoration.underline,
-                              color: Colors.white,
+                              color: Color(0xFF00D2F3),
                               fontWeight: FontWeight.bold,
                               fontSize: 13,
                             ),
@@ -460,55 +518,41 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
   Widget _buildBrandLogosRow(bool isDesktop) {
     final double height = isDesktop ? 60 : 40;
     return Container(
-      color: const Color(0xFF080B1C),
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF080B1C),
+        border: Border.symmetric(
+          horizontal: BorderSide(
+            color: Colors.white.withOpacity(0.04),
+            width: 1,
+          ),
+        ),
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
       child: Center(
         child: Container(
-          constraints: const BoxConstraints(maxWidth: 1000),
+          constraints: const BoxConstraints(maxWidth: 1100),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildLogo('Disney', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/160px-Disney%2B_logo.svg.png', height),
+                BrandCard(name: 'Disney', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/160px-Disney%2B_logo.svg.png', height: height),
                 _buildPlusSign(),
-                _buildLogo('Pixar', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Pixar_logo.svg/160px-Pixar_logo.svg.png', height * 0.7),
+                BrandCard(name: 'Pixar', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Pixar_logo.svg/160px-Pixar_logo.svg.png', height: height * 0.7),
                 _buildPlusSign(),
-                _buildLogo('Marvel', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/160px-Marvel_Logo.svg.png', height * 0.6),
+                BrandCard(name: 'Marvel', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/160px-Marvel_Logo.svg.png', height: height * 0.6),
                 _buildPlusSign(),
-                _buildLogo('Star Wars', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/160px-Star_Wars_Logo.svg.png', height * 0.75),
+                BrandCard(name: 'Star Wars', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/160px-Star_Wars_Logo.svg.png', height: height * 0.75),
                 _buildPlusSign(),
-                _buildLogo('Nat Geo', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/National_Geographic_logo.svg/160px-National_Geographic_logo.svg.png', height * 0.7),
+                BrandCard(name: 'Nat Geo', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/National_Geographic_logo.svg/160px-National_Geographic_logo.svg.png', height: height * 0.7),
                 _buildPlusSign(),
-                _buildLogo('ESPN', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/ESPN_wordmark.svg/160px-ESPN_wordmark.svg.png', height * 0.5),
+                BrandCard(name: 'ESPN', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/ESPN_wordmark.svg/160px-ESPN_wordmark.svg.png', height: height * 0.5),
                 _buildPlusSign(),
-                _buildLogo('Hulu', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Hulu_Logo.svg/160px-Hulu_Logo.svg.png', height * 0.55),
+                BrandCard(name: 'Hulu', logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Hulu_Logo.svg/160px-Hulu_Logo.svg.png', height: height * 0.55),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildLogo(String name, String url, double height) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Image.network(
-        url,
-        height: height,
-        fit: BoxFit.contain,
-        color: Colors.white,
-        errorBuilder: (context, error, stackTrace) {
-          return Text(
-            name.toUpperCase(),
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          );
-        },
       ),
     );
   }
@@ -520,7 +564,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
         '+',
         style: TextStyle(
           color: Color(0xFF00D2F3),
-          fontSize: 18,
+          fontSize: 22,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -529,7 +573,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
 
   Widget _buildESPNPromoBanner(bool isDesktop) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
       decoration: const BoxDecoration(
         color: Color(0xFF050816),
       ),
@@ -543,10 +587,21 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
               Expanded(
                 flex: isDesktop ? 1 : 0,
                 child: Container(
-                  height: isDesktop ? 340 : 250,
+                  height: isDesktop ? 360 : 250,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.08),
+                      width: 1.5,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.6),
+                        blurRadius: 15,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
                     image: const DecorationImage(
                       image: NetworkImage(
                         'https://images.unsplash.com/photo-1518063319789-7217e6706b04?q=80&w=800&auto=format&fit=crop',
@@ -558,12 +613,12 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10),
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: [
-                              Colors.black.withOpacity(0.7),
+                              Colors.black.withOpacity(0.8),
                               Colors.transparent,
                             ],
                           ),
@@ -589,14 +644,19 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                             ),
                             const SizedBox(width: 15),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white, width: 1),
-                                borderRadius: BorderRadius.circular(2),
+                                border: Border.all(color: const Color(0xFF00D2F3), width: 1),
+                                borderRadius: BorderRadius.circular(4),
+                                color: const Color(0xFF00D2F3).withOpacity(0.1),
                               ),
                               child: const Text(
                                 'Disney+ Premium',
-                                style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF00D2F3),
+                                ),
                               ),
                             )
                           ],
@@ -606,7 +666,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                   ),
                 ),
               ),
-              const SizedBox(width: 40, height: 24),
+              const SizedBox(width: 48, height: 32),
               Expanded(
                 flex: isDesktop ? 1 : 0,
                 child: Column(
@@ -617,7 +677,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                       children: [
                         Image.network(
                           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/ESPN_wordmark.svg/160px-ESPN_wordmark.svg.png',
-                          height: 30,
+                          height: 32,
                           color: Colors.white,
                           errorBuilder: (context, error, stackTrace) => const Text(
                             'ESPN',
@@ -628,19 +688,19 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 12),
                         const Text(
                           'EN',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF8E9099),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 12),
                         Image.network(
                           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/160px-Disney%2B_logo.svg.png',
-                          height: 30,
+                          height: 32,
                           color: Colors.white,
                           errorBuilder: (context, error, stackTrace) => const Text(
                             'Disney+',
@@ -653,33 +713,36 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 14),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white.withOpacity(0.6), width: 1),
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF00D2F3), Color(0xFF004D40)],
+                        ),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
                         'Plan Premium',
                         style: GoogleFonts.bebasNeue(
                           fontSize: 14,
-                          letterSpacing: 1.0,
-                          color: Colors.white,
+                          letterSpacing: 1.2,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 20),
                     Text(
                       'Toda la cobertura del mundial las 24 horas: los mejores partidos con tus relatores favoritos y los eventos en vivo que te apasionan están en el plan Premium de Disney+',
                       textAlign: isDesktop ? TextAlign.start : TextAlign.center,
                       style: const TextStyle(
                         fontSize: 16,
-                        color: Colors.white,
-                        height: 1.5,
+                        color: Color(0xFFE1E2E4),
+                        height: 1.6,
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 28),
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
@@ -689,16 +752,18 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF00D2F3),
                         foregroundColor: Colors.black,
-                        padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 18),
+                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(8),
                         ),
+                        elevation: 6,
+                        shadowColor: const Color(0xFF00D2F3).withOpacity(0.3),
                       ),
                       child: Text(
                         'SUSCRIBIRME AHORA',
                         style: GoogleFonts.bebasNeue(
                           fontSize: 18,
-                          letterSpacing: 1.0,
+                          letterSpacing: 1.2,
                         ),
                       ),
                     ),
@@ -715,7 +780,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
   Widget _buildTop10Section() {
     return Container(
       color: const Color(0xFF040714),
-      padding: const EdgeInsets.symmetric(vertical: 48),
+      padding: const EdgeInsets.symmetric(vertical: 56),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -724,13 +789,13 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
             child: Text(
               'Top 10 Hoy',
               style: GoogleFonts.bebasNeue(
-                fontSize: 42,
+                fontSize: 46,
                 color: Colors.white,
                 letterSpacing: 2.0,
               ),
             ),
           ),
-          const SizedBox(height: 28),
+          const SizedBox(height: 32),
           SizedBox(
             height: 240,
             child: ListView.builder(
@@ -739,117 +804,11 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
               itemCount: _top10Movies.length,
               itemBuilder: (context, index) {
                 final movie = _top10Movies[index];
-                return Container(
-                  margin: const EdgeInsets.only(right: 48),
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Container(
-                        width: 140,
-                        height: 210,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.5),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              Image.network(
-                                movie['poster']!,
-                                fit: BoxFit.cover,
-                                loadingBuilder: (context, child, progress) {
-                                  if (progress == null) return child;
-                                  return Container(color: const Color(0xFF1E212E));
-                                },
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Container(
-                                    color: const Color(0xFF1E212E),
-                                    alignment: Alignment.center,
-                                    child: const Icon(Icons.movie, size: 40, color: Colors.grey),
-                                  );
-                                },
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.transparent,
-                                      Colors.black.withOpacity(0.8),
-                                      Colors.black,
-                                    ],
-                                    stops: const [0.6, 0.9, 1.0],
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 8,
-                                left: 8,
-                                right: 8,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      movie['title']!,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      movie['meta']!,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        color: Color(0xFF8E9099),
-                                        fontSize: 8,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: -32,
-                        bottom: -15,
-                        child: Text(
-                          '${index + 1}',
-                          style: GoogleFonts.bebasNeue(
-                            fontSize: 130,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: -5,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
-                              ..color = const Color(0xFF00D2F3),
-                            shadows: const [
-                              Shadow(
-                                offset: Offset(2, 2),
-                                blurRadius: 8,
-                                color: Colors.black,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                return MovieCard(
+                  title: movie['title']!,
+                  meta: movie['meta']!,
+                  posterUrl: movie['poster']!,
+                  index: index,
                 );
               },
             ),
@@ -862,7 +821,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
   Widget _buildPlanSelectionSection(bool isDesktop) {
     return Container(
       color: const Color(0xFF050816),
-      padding: const EdgeInsets.symmetric(vertical: 56, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
       child: Center(
         child: Container(
           constraints: const BoxConstraints(maxWidth: 900),
@@ -871,25 +830,25 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
               Text(
                 '¿Qué plan vas a elegir?',
                 style: GoogleFonts.bebasNeue(
-                  fontSize: 48,
+                  fontSize: 52,
                   color: Colors.white,
-                  letterSpacing: 1.5,
+                  letterSpacing: 2.0,
                 ),
               ),
               const SizedBox(height: 8),
               Text(
                 'Podrás modificarlo o cancelarlo cuando quieras.',
                 style: GoogleFonts.lora(
-                  fontSize: 16,
+                  fontSize: 17,
                   color: const Color(0xFFA6A9B2),
                   fontStyle: FontStyle.italic,
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 48),
               Row(
                 children: [
                   Expanded(
-                    child: _buildPlanHeaderButton(
+                    child: PlanCard(
                       planName: 'PREMIUM',
                       price: 'PEN 68,90/mes (final)*',
                       badge: 'Más popular',
@@ -901,9 +860,9 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                       },
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 20),
                   Expanded(
-                    child: _buildPlanHeaderButton(
+                    child: PlanCard(
                       planName: 'ESTÁNDAR',
                       price: 'PEN 49,90/mes (final)*',
                       badge: null,
@@ -917,12 +876,19 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 28),
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF0A0E23),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.white.withOpacity(0.08)),
+                  color: const Color(0xFF0A0E23).withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.white.withOpacity(0.06)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    )
+                  ],
                 ),
                 child: Column(
                   children: [
@@ -936,7 +902,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                     _buildDivider(),
                     _buildComparisonFeatureRow(
                       title: 'Todos los canales de ESPN, torneos y más de 500 eventos exclusivos por mes***',
-                      premiumWidget: const Icon(Icons.check, color: Colors.white, size: 22),
+                      premiumWidget: const Icon(Icons.check, color: Color(0xFF00D2F3), size: 24),
                       standardWidget: const Text('—', style: TextStyle(color: Color(0xFF8E9099), fontSize: 18, fontWeight: FontWeight.bold)),
                       isHighlightPremium: _selectedPlan == 'premium',
                     ),
@@ -946,16 +912,16 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                       premiumWidget: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.check, color: Colors.white, size: 22),
-                          SizedBox(height: 2),
-                          Text('4K UHD/HDR + Dolby Atmos', style: TextStyle(fontSize: 10, color: Color(0xFF00D2F3))),
+                          Icon(Icons.check, color: Color(0xFF00D2F3), size: 24),
+                          SizedBox(height: 4),
+                          Text('4K UHD/HDR + Dolby Atmos', style: TextStyle(fontSize: 10, color: Color(0xFF00D2F3), fontWeight: FontWeight.bold)),
                         ],
                       ),
                       standardWidget: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.check, color: Colors.white, size: 22),
-                          SizedBox(height: 2),
+                          Icon(Icons.check, color: Colors.white, size: 20),
+                          SizedBox(height: 4),
                           Text('1080p Full HD + Audio 5.1', style: TextStyle(fontSize: 10, color: Color(0xFF8E9099))),
                         ],
                       ),
@@ -964,7 +930,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                     _buildDivider(),
                     _buildComparisonFeatureRow(
                       title: 'Dispositivos para ver en simultáneo',
-                      premiumWidget: const Text('4', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                      premiumWidget: const Text('4', style: TextStyle(color: Color(0xFF00D2F3), fontSize: 20, fontWeight: FontWeight.bold)),
                       standardWidget: const Text('2', style: TextStyle(color: Color(0xFF8E9099), fontSize: 18, fontWeight: FontWeight.bold)),
                       isHighlightPremium: _selectedPlan == 'premium',
                     ),
@@ -978,100 +944,19 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 28),
               Text(
                 '* El precio podría variar si el pago se realiza mediante otros proveedores. ** Descuento aplicable en comparación al plan de facturación mensual por 12 meses. *** Eventos y transmisiones en vivo están sujetos a derechos locales en cada país. **** Calidad de video y audio sujeta al dispositivo compatible y velocidad de conexión.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 11,
-                  color: const Color(0xFF8E9099).withOpacity(0.8),
-                  height: 1.4,
+                  color: const Color(0xFF8E9099).withOpacity(0.6),
+                  height: 1.5,
                 ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildPlanHeaderButton({
-    required String planName,
-    required String price,
-    required String? badge,
-    required bool isActive,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            height: 24,
-            alignment: Alignment.center,
-            child: badge != null
-                ? Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Text(
-                      'Más popular',
-                      style: TextStyle(
-                        color: Color(0xFF040714),
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          ),
-          const SizedBox(height: 6),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-            decoration: BoxDecoration(
-              color: isActive ? const Color(0xFF00D2F3) : const Color(0xFF1E212E),
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                color: isActive ? const Color(0xFF00D2F3) : Colors.transparent,
-                width: 1,
-              ),
-              boxShadow: isActive
-                  ? [
-                      BoxShadow(
-                        color: const Color(0xFF00D2F3).withOpacity(0.3),
-                        blurRadius: 12,
-                        offset: const Offset(0, 4),
-                      )
-                    ]
-                  : null,
-            ),
-            child: Column(
-              children: [
-                Text(
-                  planName,
-                  style: GoogleFonts.bebasNeue(
-                    fontSize: 24,
-                    color: isActive ? Colors.black : Colors.white,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  price,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: isActive ? Colors.black.withOpacity(0.8) : const Color(0xFF8E9099),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -1084,7 +969,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
     required bool isHighlightPremium,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 20),
       child: Row(
         children: [
           Expanded(
@@ -1095,12 +980,12 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 15,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 3),
+                const SizedBox(height: 4),
                 Text(
                   subtitle,
                   style: const TextStyle(
@@ -1118,7 +1003,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                 premiumText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                   color: isHighlightPremium ? const Color(0xFF00D2F3) : Colors.white,
                 ),
@@ -1132,7 +1017,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                 standardText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                   color: !isHighlightPremium ? const Color(0xFF00D2F3) : const Color(0xFF8E9099),
                 ),
@@ -1151,7 +1036,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
     required bool isHighlightPremium,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       child: Row(
         children: [
           Expanded(
@@ -1159,9 +1044,9 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
             child: Text(
               title,
               style: const TextStyle(
-                fontSize: 14,
+                fontSize: 15,
                 color: Color(0xFFE1E2E4),
-                height: 1.3,
+                height: 1.4,
               ),
             ),
           ),
@@ -1199,14 +1084,14 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
   Widget _buildDivider() {
     return Divider(
       height: 1,
-      color: Colors.white.withOpacity(0.08),
+      color: Colors.white.withOpacity(0.06),
     );
   }
 
   Widget _buildFAQSection(bool isDesktop) {
     return Container(
       color: const Color(0xFF040714),
-      padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 24),
       child: Center(
         child: Container(
           constraints: const BoxConstraints(maxWidth: 850),
@@ -1217,12 +1102,12 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
                 'Preguntas frecuentes',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.lora(
-                  fontSize: 36,
+                  fontSize: 38,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 36),
+              const SizedBox(height: 40),
               ..._faqs.map((faq) => _buildFAQCard(faq['question']!, faq['answer']!)),
             ],
           ),
@@ -1233,11 +1118,11 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
 
   Widget _buildFAQCard(String question, String answer) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 18),
       decoration: BoxDecoration(
-        color: const Color(0xFF131520),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: Colors.white.withOpacity(0.04)),
+        color: const Color(0xFF131520).withOpacity(0.6),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.white.withOpacity(0.05)),
       ),
       child: ExpansionTile(
         title: Text(
@@ -1252,7 +1137,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
         textColor: Colors.white,
         iconColor: const Color(0xFF00D2F3),
         collapsedIconColor: Colors.white,
-        childrenPadding: const EdgeInsets.all(20).copyWith(top: 0),
+        childrenPadding: const EdgeInsets.all(22).copyWith(top: 0),
         shape: const Border(),
         children: [
           Align(
@@ -1274,12 +1159,12 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
   Widget _buildFooterSection() {
     return Container(
       color: const Color(0xFF040714),
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 24),
       child: Column(
         children: [
           Image.asset(
             'assets/images/logo_local.png',
-            height: 35,
+            height: 38,
             color: Colors.white,
             fit: BoxFit.contain,
             errorBuilder: (context, error, stackTrace) => Text(
@@ -1287,11 +1172,11 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
               style: GoogleFonts.bebasNeue(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 28),
           Wrap(
             alignment: WrapAlignment.center,
-            spacing: 20,
-            runSpacing: 10,
+            spacing: 24,
+            runSpacing: 12,
             children: [
               _buildFooterLink('Dispositivos compatibles'),
               _buildFooterLink('Contrato de suscripción'),
@@ -1301,7 +1186,7 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
               _buildFooterLink('Ayuda'),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
           Container(
             constraints: const BoxConstraints(maxWidth: 800),
             child: Text(
@@ -1309,8 +1194,8 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12,
-                color: const Color(0xFF8E9099).withOpacity(0.7),
-                height: 1.4,
+                color: const Color(0xFF8E9099).withOpacity(0.5),
+                height: 1.5,
               ),
             ),
           ),
@@ -1328,6 +1213,332 @@ class _DisneyLandingPageState extends State<DisneyLandingPage> {
           fontSize: 12,
           color: Color(0xFF8E9099),
           decoration: TextDecoration.underline,
+        ),
+      ),
+    );
+  }
+}
+
+class BrandCard extends StatefulWidget {
+  final String name;
+  final String logoUrl;
+  final double height;
+  const BrandCard({super.key, required this.name, required this.logoUrl, required this.height});
+
+  @override
+  State<BrandCard> createState() => _BrandCardState();
+}
+
+class _BrandCardState extends State<BrandCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOut,
+        transform: Matrix4.identity()..scale(_isHovered ? 1.08 : 1.0),
+        margin: const EdgeInsets.symmetric(horizontal: 8),
+        width: 140,
+        height: 80,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              const Color(0xFF1E2230).withOpacity(0.6),
+              const Color(0xFF0D111A).withOpacity(0.8),
+            ],
+          ),
+          border: Border.all(
+            color: _isHovered
+                ? const Color(0xFF00D2F3).withOpacity(0.8)
+                : const Color(0xFFF9F9F9).withOpacity(0.08),
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: _isHovered
+                  ? const Color(0xFF00D2F3).withOpacity(0.2)
+                  : Colors.black.withOpacity(0.4),
+              blurRadius: _isHovered ? 12 : 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(12),
+        child: Image.network(
+          widget.logoUrl,
+          color: Colors.white,
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) => Text(
+            widget.name.toUpperCase(),
+            style: GoogleFonts.bebasNeue(fontSize: 16, color: Colors.white, letterSpacing: 1.0),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MovieCard extends StatefulWidget {
+  final String title;
+  final String meta;
+  final String posterUrl;
+  final int index;
+  const MovieCard({
+    super.key,
+    required this.title,
+    required this.meta,
+    required this.posterUrl,
+    required this.index,
+  });
+
+  @override
+  State<MovieCard> createState() => _MovieCardState();
+}
+
+class _MovieCardState extends State<MovieCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOut,
+        transform: Matrix4.identity()..scale(_isHovered ? 1.06 : 1.0),
+        margin: const EdgeInsets.only(right: 48),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              width: 140,
+              height: 210,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: _isHovered
+                      ? const Color(0xFF00D2F3).withOpacity(0.8)
+                      : Colors.transparent,
+                  width: 1.5,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: _isHovered
+                        ? const Color(0xFF00D2F3).withOpacity(0.3)
+                        : Colors.black.withOpacity(0.5),
+                    blurRadius: _isHovered ? 15 : 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.network(
+                      widget.posterUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: const Color(0xFF1E212E),
+                        alignment: Alignment.center,
+                        child: const Icon(Icons.movie, size: 40, color: Colors.grey),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.8),
+                            Colors.black,
+                          ],
+                          stops: const [0.6, 0.9, 1.0],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 8,
+                      left: 8,
+                      right: 8,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            widget.meta,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Color(0xFF8E9099),
+                              fontSize: 8,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              left: -32,
+              bottom: -15,
+              child: Text(
+                '${widget.index + 1}',
+                style: GoogleFonts.bebasNeue(
+                  fontSize: 130,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -5,
+                  foreground: Paint()
+                    ..style = PaintingStyle.stroke
+                    ..strokeWidth = 3
+                    ..color = _isHovered ? Colors.white : const Color(0xFF00D2F3),
+                  shadows: const [
+                    Shadow(
+                      offset: Offset(2, 2),
+                      blurRadius: 8,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PlanCard extends StatefulWidget {
+  final String planName;
+  final String price;
+  final String? badge;
+  final bool isActive;
+  final VoidCallback onTap;
+  const PlanCard({
+    super.key,
+    required this.planName,
+    required this.price,
+    required this.badge,
+    required this.isActive,
+    required this.onTap,
+  });
+
+  @override
+  State<PlanCard> createState() => _PlanCardState();
+}
+
+class _PlanCardState extends State<PlanCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeOut,
+          transform: Matrix4.identity()..scale(_isHovered ? 1.03 : 1.0),
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: widget.isActive
+                  ? [
+                      const Color(0xFF00D2F3).withOpacity(0.15),
+                      const Color(0xFF004D40).withOpacity(0.35),
+                    ]
+                  : [
+                      const Color(0xFF1E212E).withOpacity(0.4),
+                      const Color(0xFF0F1118).withOpacity(0.7),
+                    ],
+            ),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: widget.isActive
+                  ? const Color(0xFF00D2F3)
+                  : const Color(0xFFF9F9F9).withOpacity(_isHovered ? 0.2 : 0.08),
+              width: 2,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: widget.isActive
+                    ? const Color(0xFF00D2F3).withOpacity(0.25)
+                    : Colors.black.withOpacity(0.4),
+                blurRadius: widget.isActive ? 16 : 8,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              if (widget.badge != null)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Text(
+                    'Más popular',
+                    style: TextStyle(
+                      color: Color(0xFF040714),
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              else
+                const SizedBox(height: 26),
+              Text(
+                widget.planName,
+                style: GoogleFonts.bebasNeue(
+                  fontSize: 28,
+                  color: Colors.white,
+                  letterSpacing: 1.5,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                widget.price,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: widget.isActive ? const Color(0xFF00D2F3) : const Color(0xFF8E9099),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
